@@ -7,7 +7,7 @@ class companiesTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('companies')->truncate();
+        DB::table('companies');
         $companies = [];
         $faker = Faker::create('hy_AM');
         foreach (range(1, 10) as $index) {
