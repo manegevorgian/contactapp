@@ -8,6 +8,6 @@
     <title>Add New Contact</title>
 </head>
 <body>
-    <h1>Add New Contacts</h1>
+    <h1>Add New Contact</h1>
 </body>
 </html>
