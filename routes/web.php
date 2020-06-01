@@ -10,6 +10,8 @@ Route::get('/contacts/create', 'ContactController@create')->name('contacts.creat
 
 Route::get('/contacts/show/{id}', 'ContactController@show')->name('contacts.show');
 
+Route::get('/contacts/edit/{id}', 'ContactController@edit')->name('contacts.edit');
+
 
 
 

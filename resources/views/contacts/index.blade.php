@@ -25,74 +25,34 @@
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Company</th>
-                                <th scope="col">Actions</th>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Company</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($contacts as $contact)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Alfred</td>
-                                <td>Kuhlman</td>
-                                <td>alfred@test.com</td>
-                                <td>Company one</td>
-                                <td width="150">
-                                    <a href="{{route('contacts.show',1)}}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
-                                    <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Frederick</td>
-                                <td>Jerde</td>
-                                <td>frederick@test.com</td>
-                                <td>Company one</td>
+                                <th>{{$contact->id}}</th>
+                                <td>{{$contact->first_name}}</td>
+                                <td>{{$contact->last_name}}</td>
+                                <td>{{$contact->email}}</td>
+                                <td>{{$contact->company_id}}</td>
                                 <td>
-                                    <a href="{{route('contacts.show',2)}}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
-                                    <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+                                    <a href="{{route('contacts.show', $contact->id)}}" class="btn btn-sm btn-circle btn-outline-info" title="Show">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{route('contacts.edit',$contact->id)}}" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')">
+                                        <i class="fa fa-times"></i>
+                                    </a>
                                 </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Joannie</td>
-                                <td>McLaughlin</td>
-                                <td>joannie@test.com</td>
-                                <td>Company Two</td>
-                                <td>
-                                    <a href="{{route('contacts.show',3)}}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
-                                    <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Odie</td>
-                                <td>Koss</td>
-                                <td>odie@test.com</td>
-                                <td>Company Two</td>
-                                <td>
-                                    <a href="{{route('contacts.show',4)}}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
-                                    <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Edna</td>
-                                <td>Ondricka</td>
-                                <td>edna@test.com</td>
-                                <td>Company Three</td>
-                                <td>
-                                    <a href="{{route('contacts.show',5)}}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
-                                    <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-                                </td>
+                                @endforeach
                             </tr>
                             </tbody>
                         </table>
