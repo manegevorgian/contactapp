@@ -8,26 +8,35 @@ use App\Company;
 class ContactController extends Controller
 {
     public function index() {
-        $contacts = Contact::all()
-                    ->sortBy('id');
-        $companies = Company::all()
-                    ->sortBy('name');
-
-        $page = DB::table('contacts')->simplePaginate(15);
-
-        return view('contacts.index',['contacts' => $page], compact('contacts', 'companies'));
+        $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
+        $contacts = Contact::orderBy('first_name', 'asc')->where(function ($query) {
+            if ($companyId = request('company_id'))
+                $query->where('company_id', $companyId);
+        })->paginate(10);
+        return view('contacts.index', compact('contacts', 'companies'));
     }
 
     public function create() {
-        $companies = Company::all()
-            ->sortBy('name');
+        $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
         return view('contacts.create', compact('companies'));
     }
 
     public function show($id) {
-        $company = Company::find($id);
-        $contact = Contact::find($id);
-        return view('contacts.show',compact('contact', 'company')); // ['contact' => $contact]
+        $contact = Contact::find($id); // all()->find($id)
+        return view('contacts.show' , compact('contact'));
+    }
+
+    public function store(Request $request) {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'company_id' => 'required|exists:companies,id',
+        ]);
+//        dd($request);
+//        dd($request->only('first_name', 'last_name'));
+        dd($request->except('first_name', 'last_name'));
     }
 
     public function edit($id) {

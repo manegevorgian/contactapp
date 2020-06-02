@@ -8,11 +8,11 @@ Route::get('/', 'ContactController@index')->name('contacts.index');
 
 Route::get('/contacts/create', 'ContactController@create')->name('contacts.create');
 
-Route::get('/contacts/show/{id}', 'ContactController@show')->name('contacts.show');
+Route::get('/contacts/{id}', 'ContactController@show')->name('contacts.show');
 
 Route::get('/contacts/edit/{id}', 'ContactController@edit')->name('contacts.edit');
 
-
+Route::post('/contacts', "ContactController@store")->name("contacts.store");
 
 
 // Admin Panel
