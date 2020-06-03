@@ -1,8 +1,7 @@
 @extends('layouts.main')
-@section('title', 'Contact App | Add New Contact')
 
 @section('content')
-    <main class="py-3">
+    <main class="py-5">
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-8">
@@ -22,3 +21,5 @@
         </div>
     </main>
 @endsection
+
+@section('title', 'Contact App | Add new contact')

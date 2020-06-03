@@ -16,45 +16,43 @@
                                     <div class="form-group row">
                                         <label for="first_name" class="col-md-3 col-form-label">First Name</label>
                                         <div class="col-md-9">
-                                            <input type="text" name="first_name" id="first_name" class="form-control" value="{{$contact->first_name}}">
+                                            <input type="text" name="first_name" id="first_name" class="form-control" value="{{$contacts->first_name}}">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="last_name" class="col-md-3 col-form-label">Last Name</label>
                                         <div class="col-md-9">
-                                            <input type="text" name="last_name" id="last_name" class="form-control" value="{{$contact->last_name}}">
+                                            <input type="text" name="last_name" id="last_name" class="form-control" value="{{$contacts->last_name}}">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="email" class="col-md-3 col-form-label">Email</label>
                                         <div class="col-md-9">
-                                            <input type="text" name="email" id="email" class="form-control" value="{{$contact->email}}">
+                                            <input type="text" name="email" id="email" class="form-control" value="{{$contacts->email}}">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="phone" class="col-md-3 col-form-label">Phone</label>
                                         <div class="col-md-9">
-                                            <input type="text" name="phone" id="phone" class="form-control" value="{{$contact->phone}}">
+                                            <input type="text" name="phone" id="phone" class="form-control" value="{{$contacts->phone}}">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="name" class="col-md-3 col-form-label">Address</label>
                                         <div class="col-md-9">
-                                            <textarea name="address" id="address" rows="3" class="form-control">{{$contact->address}}</textarea>
+                                            <textarea name="address" id="address" rows="3" class="form-control">{{$contacts->address}}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="company_id" class="col-md-3 col-form-label">Company</label>
                                         <div class="col-md-9">
                                             <select name="company_id" id="company_id" class="form-control">
-{{--                                                <option value="">Select Company</option>--}}
-{{--                                                <option value="{{$companies->id}}" selected>{{$companies->name}}</option>--}}
-                                                @foreach($companies as $company)
-                                                    <option value="{{$companies->id}}">{{$companies->name}}</option>
+                                                @foreach ($companies as $id => $name)
+                                                    <option {{ $id == request('id') ? 'selected' : '' }} value="{{ $id }}">{{ $name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

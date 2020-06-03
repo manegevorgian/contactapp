@@ -49,7 +49,7 @@
 </nav>
 
 <!-- content -->
-<main class="py-5">
+<main class="py-3">
     <div class="container">
         <div class="row">
             <div class="col-md-3">

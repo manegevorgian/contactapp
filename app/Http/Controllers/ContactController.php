@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
+use Illuminate\Http\Request;
 use App\Contact;
 use App\Company;
 
@@ -12,7 +13,7 @@ class ContactController extends Controller
         $contacts = Contact::orderBy('first_name', 'asc')->where(function ($query) {
             if ($companyId = request('company_id'))
                 $query->where('company_id', $companyId);
-        })->paginate(10);
+        })->paginate(5);
         return view('contacts.index', compact('contacts', 'companies'));
     }
 
@@ -40,9 +41,16 @@ class ContactController extends Controller
     }
 
     public function edit($id) {
-        $companies = Company::find($id);
-        $contact = Contact::find($id);
-        return view('contacts.edit',compact('contact', 'companies')); // ['contact' => $contact]
+        $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
+        $contacts = Contact::find($id);
+        return view('contacts.edit',compact('contacts', 'companies')); // ['contact' => $contact]
     }
+
+    public function drop($id) {
+        $companies = Company::orderBy('name')->pluck('name', 'id');
+        $contact = DB::table('contacts')->delete($id);
+        return view('contacts.index',compact('contact','companies'));
+    }
+
 
 }
