@@ -14,6 +14,8 @@ Route::get('/{id}', 'ContactController@show')->name('contacts.show');
 
 Route::get('/edit/{id}', 'ContactController@edit')->name('contacts.edit');
 
+Route::post('/edit/{id}', 'ContactController@change')->name('contacts.change');
+
 Route::get('/drop/{id}', 'ContactController@drop')->name('contacts.drop');
 
 

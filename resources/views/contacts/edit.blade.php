@@ -11,6 +11,13 @@
                             <strong>Edit Contact</strong>
                         </div>
                         <div class="card-body">
+{{--                            <form action="{{ route('contacts.change', $contacts->id) }}" method="POST">--}}
+{{--                                @csrf--}}
+{{--                                @include('contacts._form')--}}
+{{--                            </form>--}}
+
+                            <form action="{{route('contacts.change', $contacts->id)}}" method="POST">
+                                @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group row">
@@ -42,7 +49,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="name" class="col-md-3 col-form-label">Address</label>
+                                        <label for="address" class="col-md-3 col-form-label">Address</label>
                                         <div class="col-md-9">
                                             <textarea name="address" id="address" rows="3" class="form-control">{{$contacts->address}}</textarea>
                                         </div>
@@ -67,6 +74,7 @@
 
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="name" class="col-md-3 col-form-label">Address</label>
+            <label for="address" class="col-md-3 col-form-label">Address</label>
             <div class="col-md-9">
                 <textarea name="address" id="address" rows="3" class="form-control @error('address') is-invalid @enderror"></textarea>
                 @error('address')
