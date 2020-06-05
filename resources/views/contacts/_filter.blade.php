@@ -3,7 +3,6 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col">
-                <label for="filter_company_id"></label>
                 <select id="filter_company_id" name="company_id" class="custom-select">
                     @foreach ($companies as $id => $name)
                         <option {{ $id == request('company_id') ? 'selected' : '' }} value="{{ $id }}">{{ $name }}</option>

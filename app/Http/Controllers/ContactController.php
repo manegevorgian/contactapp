@@ -9,7 +9,8 @@ use App\Company;
 
 class ContactController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
         $contacts = Contact::orderBy('first_name', 'asc')->where(function ($query) {
             if ($companyId = request('company_id'))
@@ -18,17 +19,20 @@ class ContactController extends Controller
         return view('contacts.index', compact('contacts', 'companies'));
     }
 
-    public function create() {
+    public function create()
+    {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
         return view('contacts.create', compact('companies'));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $contact = Contact::find($id); // all()->find($id)
         return view('contacts.show' , compact('contact'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         $first_name = $request->input('first_name');
         $last_name = $request->input('last_name');
@@ -66,13 +70,15 @@ class ContactController extends Controller
 
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
         $contacts = Contact::find($id);
         return view('contacts.edit',compact('contacts', 'companies')); // ['contact' => $contact]
     }
 
-    public function change(Request $request) {
+    public function change(Request $request)
+    {
 
         $validation = \Validator::make($request->all(),
             [
@@ -96,15 +102,12 @@ class ContactController extends Controller
                 ]);
         }
         return Redirect(route('contacts.show', $request->id));
-
     }
 
-    public function drop($id) {
-        $companies = Company::orderBy('name')->pluck('name', 'id');
-        $contacts = Contact::find($id);
+    public function drop($id)
+    {
         DB::table('contacts')->delete($id);
-        return view('contacts.index',compact('contacts','companies'));
+        return Redirect(route('contacts.index'));
     }
-
 
 }

@@ -58,6 +58,7 @@
                                         <label for="company_id" class="col-md-3 col-form-label">Company</label>
                                         <div class="col-md-9">
                                             <select name="company_id" id="company_id" class="form-control">
+                                                <option  value="{{ $contacts->company->id }}" selected>{{ $contacts->company->name }}</option>
                                                 @foreach ($companies as $id => $name)
                                                     <option {{ $id == request('id') ? 'selected' : '' }} value="{{ $id }}">{{ $name }}</option>
                                                 @endforeach
