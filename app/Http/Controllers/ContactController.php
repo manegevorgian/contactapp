@@ -3,111 +3,73 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Contact;
 use App\Company;
 
 class ContactController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
-        $contacts = Contact::orderBy('first_name', 'asc')->where(function ($query) {
-            if ($companyId = request('company_id'))
+        $contacts = Contact::orderBy('id', 'desc')->where(function ($query) {
+            if ($companyId = request('company_id')) {
                 $query->where('company_id', $companyId);
+            }
+            if ($search = request('search')) {
+                $query->where('first_name', 'LIKE', "%{$search}%");
+            }
         })->paginate(5);
         return view('contacts.index', compact('contacts', 'companies'));
     }
 
-    public function create()
-    {
+    public function create() {
+        $contact = new Contact();
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
-        return view('contacts.create', compact('companies'));
+        return view('contacts.create', compact('companies', 'contact'));
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         $contact = Contact::find($id); // all()->find($id)
         return view('contacts.show' , compact('contact'));
     }
 
-    public function store(Request $request)
-    {
-
-        $first_name = $request->input('first_name');
-        $last_name = $request->input('last_name');
-        $email = $request->input('email');
-        $address = $request->input('address');
-        $phone = $request->input('phone');
-        $company_id = $request->input('company_id');
-
-        $validation = \Validator::make($request->all(),
-        [
+    public function update($id, Request $request) {
+        $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
             'address' => 'required',
-            'company_id' => 'required|exists:companies,id'
+            'company_id' => 'required|exists:companies,id',
         ]);
+        $contact = Contact::findOrFail($id);
+        $contact->update($request->all());
+        return redirect()->route('contacts.index')->with('message', "Contact has been updated successfully");
+    }
 
-        if(!$validation->fails()) {
-            $new_contact = new Contact();
+    public function edit($id) {
+        $contact = Contact::findOrFail($id);
+        $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
+        return view('contacts.edit', compact('companies', 'contact'));
+    }
 
-            $new_contact -> first_name = $first_name;
-            $new_contact -> last_name = $last_name;
-            $new_contact -> email = $email;
-            $new_contact -> address = $address;
-            $new_contact -> phone = $phone;
-            $new_contact -> company_id = $company_id;
-
-            $new_contact -> save();
-        }
+    public function store(Request $request) {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'company_id' => 'required|exists:companies,id',
+        ]);
 //        dd($request);
 //        dd($request->only('first_name', 'last_name'));
 //        dd($request->except('first_name', 'last_name'));
-
-        return redirect (route('contacts.index'));
-
+        Contact::create($request->all());
+        return redirect()->route('contacts.index')->with('message', "Contact has been added successfully");
     }
 
-    public function edit($id)
-    {
-        $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
-        $contacts = Contact::find($id);
-        return view('contacts.edit',compact('contacts', 'companies')); // ['contact' => $contact]
+    public function destroy($id) {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+
+        return back()->with('message', "Contact has been deleted successfully");
     }
-
-    public function change(Request $request)
-    {
-
-        $validation = \Validator::make($request->all(),
-            [
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'email' => 'required|email',
-                'address' => 'required',
-                'company_id' => 'required|exists:companies,id'
-            ]);
-
-        if(!$validation->fails()) {
-             DB::table('contacts')
-                ->where('id', $request->id)
-                ->update([
-                    'first_name'       =>  $request->first_name,
-                    'last_name'        =>  $request->last_name,
-                    'email'            =>  $request->email,
-                    'address'          =>  $request->address,
-                    'phone'            =>  $request->phone,
-                    'company_id'       =>  $request->company_id,
-                ]);
-        }
-        return Redirect(route('contacts.show', $request->id));
-    }
-
-    public function drop($id)
-    {
-        DB::table('contacts')->delete($id);
-        return Redirect(route('contacts.index'));
-    }
-
 }

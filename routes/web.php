@@ -4,19 +4,19 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'ContactController@index')->name('contacts.index');
+Route::get('/', "ContactController@index")->name("contacts.index");
 
 Route::post('/', "ContactController@store")->name("contacts.store");
 
-Route::get('/create', 'ContactController@create')->name('contacts.create');
+Route::get('/contacts/create', "ContactController@create")->name("contacts.create");
 
-Route::get('/{id}', 'ContactController@show')->name('contacts.show');
+Route::get('/contacts/{id}', "ContactController@show")->name("contacts.show");
 
-Route::get('/edit/{id}', 'ContactController@edit')->name('contacts.edit');
+Route::put('/contacts/{id}', "ContactController@update")->name("contacts.update");
 
-Route::post('/edit/{id}', 'ContactController@change')->name('contacts.change');
+Route::delete('/contacts/{id}', "ContactController@destroy")->name("contacts.destroy");
 
-Route::get('/drop/{id}', 'ContactController@drop')->name('contacts.drop');
+Route::get('/contacts/{id}/edit', "ContactController@edit")->name("contacts.edit");
 
 
 
