@@ -24,16 +24,16 @@ document.querySelector('#btn-clear').addEventListener('click', () => {
     window.location.href = window.location.href.split('?')[0];
 });
 
-// const toggleClearButton = () => {
-//     let query = location.search,
-//         pattern = /[?&]search=/,
-//         button = document.querySelector('#btn-clear');
-//
-//     if (pattern.test(query)) {
-//         button.style.display = "block";
-//     } else {
-//         button.style.display = "none";
-//     }
-// };
-//
-// toggleClearButton();
+const toggleClearButton = () => {
+    let query = location.search,
+        pattern = /[?&]search=/,
+        button = document.querySelector('#btn-clear');
+
+    if (pattern.test(query)) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
+    }
+};
+
+toggleClearButton();

@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>My Contact</title>
+    <title>My Account</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <!-- Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="{{asset('css/jasny-bootstrap.min.cs')}}" rel="stylesheet">
-    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/jasny-bootstrap.min.cs') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
 <!-- navbar -->
@@ -92,7 +92,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="bio">Bio</label>
+                                    <label for="biod">Bio</label>
                                     <textarea name="bio" id="biod" rows="3" class="form-control"></textarea>
                                 </div>
                             </div>
@@ -130,10 +130,10 @@
     </div>
 </main>
 
-<script src="{{asset('js/jquery.min.js')}}"></script>
-<script src="{{asset('js/popper.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/jasny-bootstrap.min.js')}}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jasny-bootstrap.min.js') }}"></script>
 
 
 <script>

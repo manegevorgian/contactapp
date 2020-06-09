@@ -18,7 +18,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <a class="navbar-brand text-uppercase" href="{{route('contacts.index')}}">
+        <a class="navbar-brand text-uppercase" href="{{ route('contacts.index') }}">
             <strong>Contact</strong> App
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbar-toggler">
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="#" class="nav-link">Companies</a></li>
-                <li class="nav-item active"><a href="{{route('contacts.index')}}" class="nav-link">Contacts</a></li>
+                <li class="nav-item active"><a href="{{ route('contacts.index') }}" class="nav-link">Contacts</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item mr-2"><a href="#" class="btn btn-outline-secondary">Login</a></li>
@@ -39,7 +39,7 @@
                         John Doe
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{route('contacts.profile')}}">Settings</a>
+                        <a class="dropdown-item" href="{{ route('contacts.profile') }}">Settings</a>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
