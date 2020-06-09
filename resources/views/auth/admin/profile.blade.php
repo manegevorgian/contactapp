@@ -39,8 +39,8 @@
                         John Doe
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{route('contacts.profile')}}">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="{{route('admin.profile')}}">Settings</a>
+                        <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                     </div>
                 </li>
             </ul>

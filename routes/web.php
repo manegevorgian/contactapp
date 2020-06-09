@@ -21,8 +21,30 @@ Route::get('/contacts/{id}/edit', "ContactController@edit") -> name("contacts.ed
 
 
 // Admin Panel
-Route::get('/contacts/settings', function (){
-    return view('contacts.profile');
-}) -> name('contacts.profile');
 
 
+
+Auth::routes();
+Route::get('/login', function ()
+{
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function ()
+{
+    return view('auth.register');
+})->name('register');
+
+Route::get('/logout', 'AdminController@logout')->name('logout');
+
+Route::post('/logout', 'AdminController@logout')->name('logout');
+
+
+
+Route::group(['middleware' => ['auth'],'prefix' => 'admin'], function()
+{
+    Route::get('/', 'AdminController@index')->name('home');
+
+    Route::get('/profile', 'AdminController@profile') -> name('admin.profile');
+
+});
