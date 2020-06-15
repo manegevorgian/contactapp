@@ -6,6 +6,7 @@ use App\Scopes\FilterScope;
 use Illuminate\Http\Request;
 use App\Contact;
 use App\Company;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
@@ -15,6 +16,10 @@ class ContactController extends Controller
                     -> pluck('name', 'id')
                     -> prepend('All Companies', '');
         $contacts = Contact::latestFirst() -> paginate(10);
+
+//        if (Auth::check()) {
+//            dd(Auth::user()->name);
+//        }
 
         return view('contacts.index', compact('contacts', 'companies'));
     }
@@ -77,4 +82,10 @@ class ContactController extends Controller
 
         return back() -> with('message', "Contact has been deleted successfully");
     }
+
+//    public function __construct()
+//    {
+//        $this -> middleware('auth') -> only('create', 'update', 'destroy');
+//    }
+
 }
